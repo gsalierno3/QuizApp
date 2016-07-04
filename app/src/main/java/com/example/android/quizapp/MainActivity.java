@@ -13,6 +13,18 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Random;
 
+/**
+ * This application is divided into 3 quizzes.  Thsi quiz has white background
+ * For the first quiz, the system selects a random state and the user needs to write the
+ * correct city capital.
+ * For the second quiz, the system selects a random state and 4 cities which are state capitals,
+ * including the capital from the selected state.  Thhere is only one correct answer.
+ *For the last quiz, which is set on a darker blue background, the system selects 4 cities at random.
+ * At least one of the cities is a state capital.
+ *
+ * The app doe snot give a score but let teh user know the correct answers after 5 failed attempts.
+ */
+
 public class MainActivity extends AppCompatActivity
 {
     private HashMap<String,String> stateAbbreviation = null; // holds the pair state-abbreviation
@@ -106,7 +118,7 @@ public class MainActivity extends AppCompatActivity
         stateCapitals.put("Wisconsin","Madison");
         stateCapitals.put("Wyoming","Cheyenne");
 
-
+        //Array of States
         states = new String[]{
                 "Alabama",
                 "Alaska",
@@ -159,7 +171,8 @@ public class MainActivity extends AppCompatActivity
                 "Wisconsin",
                 "Wyoming"};
 
-
+        //array of major cities.  State capitals are listed twice to increase the probability
+        //of being selected
         majorCities = new String[]{
                 "New York",
                 "Los Angeles",
@@ -417,6 +430,9 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    /**
+     * sets up the top quiz
+     */
     public void whiteQuiz()
     {
         Random rnd = new Random();
@@ -433,6 +449,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    //method called from a button.
     public void newState(View v)
     {
         whiteQuiz();
@@ -507,11 +524,13 @@ public class MainActivity extends AppCompatActivity
         return stateCapitals.get(randomState);
     }
 
+    //method called from the GUI
     public void setMiddleQuiz(View v)
     {
         setMidQuiz();
     }
 
+    //sets up the light blue quiz (radio buttons)
     private void setMidQuiz()
     {
         selection=-1;
@@ -600,13 +619,13 @@ public class MainActivity extends AppCompatActivity
         rb3.setChecked(false);
     }//end setMiddleQuiz
 
+    // handles the ANSWER button for the middle quiz (light blue)
     public void answerCapital(View v)
     {
         RadioButton rb0 = (RadioButton) findViewById(R.id.capital0);
         RadioButton rb1 = (RadioButton) findViewById(R.id.capital1);
         RadioButton rb2 = (RadioButton) findViewById(R.id.capital2);
         RadioButton rb3 = (RadioButton) findViewById(R.id.capital3);
-
 
         if(rb0.isChecked()) selection = 0;
         if(rb1.isChecked()) selection = 1;
@@ -664,7 +683,7 @@ public class MainActivity extends AppCompatActivity
         Toast.makeText(this,"Check the right answer", Toast.LENGTH_LONG).show();
     }
 
-
+    //selects a random major city
     private String selectRandomCity()
     {
         Random rnd = new Random();
@@ -672,11 +691,13 @@ public class MainActivity extends AppCompatActivity
         return majorCities[cityNumber];
     }
 
+    //method called from the NEW QUESTION button to set up quiz.
     public void setLowerQuiz(View v)
     {
         setBlueQuiz();
     }
 
+    //sets up the lower quiz (dark blue)
     public void setBlueQuiz()
     {
         String randomCapital = selectRandomCapital();
@@ -722,14 +743,14 @@ public class MainActivity extends AppCompatActivity
         cb2.setChecked(false);
         cb3.setChecked(false);
 
-        //check if city is a state capital
+        //check if city is a state capital and saves it to an array variable
         if(stateCapitals.containsValue(cb0.getText().toString())) cityIsCapital[0]=true;
         if(stateCapitals.containsValue(cb1.getText().toString())) cityIsCapital[1]=true;
         if(stateCapitals.containsValue(cb2.getText().toString())) cityIsCapital[2]=true;
         if(stateCapitals.containsValue(cb3.getText().toString())) cityIsCapital[3]=true;
-
     }
 
+    //processes the answer after teh ANSWER button is pressed.
     public void answerBlueQuiz(View v)
     {
 
@@ -750,7 +771,7 @@ public class MainActivity extends AppCompatActivity
             return;
         }
 
-        //compare each checkbox with its corresponding cityIsCapital array.
+        //creates and initializes a variable to store if the user is right.
         boolean[] userAnsweredRight = new boolean[4];
         for(int i=0; i<userAnsweredRight.length; i++)
         {
@@ -758,17 +779,18 @@ public class MainActivity extends AppCompatActivity
         }
 
         boolean noRightAnswer=true;
-
+        //determines which check box has a right answer.
         if (cb0.isChecked() == cityIsCapital[0]) userAnsweredRight[0]=true;
         if (cb1.isChecked() == cityIsCapital[1]) userAnsweredRight[1]=true;
         if (cb2.isChecked() == cityIsCapital[2]) userAnsweredRight[2]=true;
         if (cb3.isChecked() == cityIsCapital[3]) userAnsweredRight[3]=true;
 
+        //provides input to the user to let them know which answers are correct
         for(int i=0; i<userAnsweredRight.length; i++)
         {
             if(userAnsweredRight[i])
             {
-                Toast.makeText(this,"Check Box No: "+ (i+1) + " is RIGHT", Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"Check Box No: "+ (i+1) + " is CORRECT", Toast.LENGTH_LONG).show();
                 noRightAnswer=false;
             }
         }
@@ -781,6 +803,8 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(this,"Try Again!!", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        //at this point there are more than 5 wrong attempts.  The system loads the right answer
         cb0.setChecked(cityIsCapital[0]);
         cb1.setChecked(cityIsCapital[1]);
         cb2.setChecked(cityIsCapital[2]);

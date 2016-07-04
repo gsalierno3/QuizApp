@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.quizapp.MainActivity">
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/state_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="state"
+                android:textAllCaps="true"
+                android:textSize="24sp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_horizontal"/>
+
+            <EditText
+                android:id="@+id/state_capital"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="8dp"
+                android:hint="Enter State Capital"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/capital_answer_button"
+                    style="@style/answer_buttons"
+                    android:text="Answer"
+                    android:onClick="checkCapital"/>
+
+                <Button
+                    android:id="@+id/new_question"
+                    style="@style/answer_buttons"
+                    android:text="New"
+                    android:onClick="newState"/>
+                <Button
+                    android:id="@+id/reset_state1"
+                    style="@style/answer_buttons"
+                    android:text="Reset"
+                    android:onClick="resetWhite"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#E8EAF6">
+
+                <RadioGroup
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="2"
+                    android:onClick="checkCapital">
+                    <RadioButton
+                        android:id="@+id/capital0"
+                        style="@style/radio_butons"
+                        android:text="Capital 1"/>
+                    <RadioButton
+                        android:id="@+id/capital1"
+                        style="@style/radio_butons"
+                        android:text="Capital 2"/>
+                    <RadioButton
+                        android:id="@+id/capital2"
+                        style="@style/radio_butons"
+                        android:text="Capital 3"/>
+                    <RadioButton
+                        android:id="@+id/capital3"
+                        style="@style/radio_butons"
+                        android:text="Capital 4"/>
+
+                </RadioGroup>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:textSize="20sp"
+                        android:text="Which City is the Capital of:"/>
+                    <TextView
+                        android:id="@+id/second_target_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:textSize="24sp"
+                        android:textAllCaps="true"
+                        android:layout_marginLeft="2dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="8dp"
+                        android:background="#C5CAE9"
+                        android:text="state"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <Button
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:background="#9FA8DA"
+                            android:textColor="#000"
+                            android:textSize="16sp"
+                            android:layout_margin="2dp"
+                            android:onClick="answerCapital"
+                            android:text="answer"/>
+                        <Button
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:background="#9FA8DA"
+                            android:textColor="#000"
+                            android:textSize="16sp"
+                            android:layout_margin="2dp"
+                            android:text="new state"
+                            android:onClick="setMiddleQuiz"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:background="#7986CB">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:orientation="vertical">
+                    <CheckBox
+                        android:id="@+id/city0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:paddingLeft="8dp"
+                        android:text="city1"/>
+                    <CheckBox
+                        android:id="@+id/city1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:paddingLeft="8dp"
+                        android:text="city1"/>
+                    <CheckBox
+                        android:id="@+id/city2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:paddingLeft="8dp"
+                        android:text="city1"/>
+                    <CheckBox
+                        android:id="@+id/city3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:paddingLeft="8dp"
+                        android:text="city1"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#fff"
+                            android:textSize="20sp"
+                            android:text="Which cities are state capitals?"/>
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:onClick="answerBlueQuiz"
+                            android:text="Answer"/>
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:text="New Question"
+                            android:onClick="setLowerQuiz"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
